@@ -3,7 +3,7 @@
  * GPA Calculator (in Java, for CLI uses)
  * @author Jeffrey Wang
  * @contributors CJ Duffee
- * @license GNU License 2.0
+ * @license None
 */
 
 import java.util.*;
