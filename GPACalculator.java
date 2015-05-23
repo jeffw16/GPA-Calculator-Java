@@ -12,13 +12,12 @@ import java.io.*;
 public class GPACalculator {
   // instance variables
   private double dividend = 0.0;
-  private double quotient;
-  private double divisor;
+  private double divisor, quotient;
   private double[] rawGrades;
-  private int[] gpamax;
+  private double[] gpamax;
   
   // constructors
-  public GPACalculator ( double[] rawGrades, int[] gpamax ) {
+  public GPACalculator ( double[] rawGrades, double[] gpamax ) {
     this.divisor = rawGrades.length-1;
     this.rawGrades = rawGrades;
     this.gpamax = gpamax;
@@ -67,12 +66,8 @@ public class GPACalculator {
       }
       
       double postgrade = midgrade / 10;
-      if ( gpamax[i] == 5 ) {
-        ++postgrade;
-      }
-      if ( gpamax[i] == 6 ) {
-        postgrade += 2;
-      }
+      postgrade += ( gpamax[i] - 4 );
+      
       dividend += postgrade;
     }
     quotient = dividend / divisor;
@@ -84,16 +79,16 @@ public class GPACalculator {
   
   public static void main ( String[] args ) {
     Scanner s = new Scanner( System.in );
-    System.out.println ( "GPA Calculator\nby Jeffrey Wang" );
+    System.out.println ( "GPA Calculator" );
     System.out.println ( "How many classes do you have?" );
     int classcount = s.nextInt();
     double[] grades = new double[classcount+1];
-    int[] gpamax = new int[classcount+1];
+    double[] gpamax = new double[classcount+1];
     for ( int i = 1; i <= classcount; i++ ) {
       System.out.println ( "Grade for class " + i + ": " );
       grades[i] = s.nextDouble();
-      System.out.println ( "GPA scale for class " + i + " (4, 5, or 6?): " );
-      gpamax[i] = s.nextInt();
+      System.out.println ( "GPA scale for class " + i + " (for example: 4, 5, or 6?): " );
+      gpamax[i] = s.nextDouble();
     }
     GPACalculator g = new GPACalculator( grades, gpamax );
     g.calculateGPA();
